@@ -1,0 +1,124 @@
+@import url(reset.css);
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+body {
+    font-family: 'Roboto', sans-serif;
+}
+.container {
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.weather-container {
+    min-width: 600px;
+    border: 1px solid #000;
+}
+.search {
+    background-image: url("../img/search.png");
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.input-container {
+    padding: 11px 15px;
+}
+.input-form {
+    display: flex;
+    justify-content: space-between;
+}
+input::placeholder {
+    font-size: 18px;
+}
+
+/* main block */
+
+.main-info {
+    border-top: 1px solid #000;
+    display: flex;
+}
+
+/* left column */
+.left-column {
+    border-right: 1px solid #000;
+    padding: 20px 16px;
+    width: 50%;
+}
+.deg {
+    font-size: 70px;
+}
+.cloud, .day-icon {
+    width: 50px;
+    height: 50px;
+}
+.left-bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.bottom-left-tex {
+    font-size: 24px;
+}
+.bottom-heart {
+    background-image: url('../img/heart.png');
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.degress-block {
+    display: flex;
+    margin-bottom: 16px;
+}
+.main-weather-block {
+    margin-bottom: 25px;
+}
+.feel-like {
+    font-size: 21px;
+    line-height: 30px;
+}
+.day-time {
+    border-bottom: 1px solid black;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+.time {
+    margin-bottom: 20px;
+}
+.forecast-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* right column */
+.right-column {
+    width: 50%;
+}
+.right-header {
+    padding: 20px 23px;
+    border-bottom: 1px solid #000;
+}
+.locations {
+    font-size: 24px;
+}
+.cities-container {
+    padding: 15px 18px 15px 18px;
+}
+.city {
+    font-size: 24px;
+    line-height: 40px;
+    font-weight: normal;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.delete-button:after {
+    display: inline-block;
+    content: "\00d7";
+    font-size: 25px;
+    align-items: baseline;
+    color: #998899;
+    cursor: pointer;
+}
+
+

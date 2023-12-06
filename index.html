@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="weather-container">
+        <div class="input-container">
+            <form class="input-form">
+                <input type="text" id="inputvalue" name="task" required placeholder="Введите город">
+                <button class="search" type="submit"></button>
+            </form>
+        </div>
+    <div class="main-info">
+        <div class="left-column">
+            <div class="left-bottom">
+                <p class="bottom-left-tex">Aktobe</p>
+                <p class="bottom-heart"></p>
+            </div>
+            <div class="degress-block">
+                <p class="deg">14</p>
+                <p class="cloud"><img src="https://openweathermap.org/img/wn/02d@2x.png" class="main-img"></p>
+            </div>
+            <div class="main-weather-block">
+                <ul class="feel-like">
+                    <li class="feels-like">Feels like: 10</li>
+                    <li class="sunrise">Sunrise: 03:21</li>
+                    <li class="sunset">Sunset: 18:54</li>
+                </ul>
+            </div>
+            <div class="days-block">
+            </div>
+        </div>
+        <div class="right-column">
+            <div class="right-header">
+                <p class="locations">Added Locations:</p>
+            </div>
+            <div class="cities-container">
+                <ul class="cities">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="module" src="./js/main.js"></script>
+<script type="module" src="./js/addFavourite.js"></script>
+</body>
+</html>
