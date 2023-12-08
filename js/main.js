@@ -12,7 +12,6 @@ showFromLocalStorage()
 function showForecast (event) {
     event.preventDefault()
     let cityName = inputValue.value.trim()
-    console.log(cityName)
     renderHtml(cityName)
 }
 

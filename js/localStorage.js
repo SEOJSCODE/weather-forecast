@@ -1,4 +1,4 @@
-import {showFromFavourite, renderListCities} from "./addFavourite.js";
+import {showFromFavourite, renderListCities, favouriteCities} from "./addFavourite.js";
 import {listcities} from "./globalConst.js";
 import {deleteFavourite} from "./addFavourite.js";
 import {renderHtml} from "./renderHtml.js"
@@ -30,8 +30,11 @@ export function showFromLocalStorage () {
     }
 }
 
-export function addToLocalStorage(city, value) {
-    localStorage.setItem(city, value)
+export function addToLocalStorage(cities) {
+    localStorage.clear()
+    for (let value of cities) {
+        localStorage.setItem(value, value)
+    }
     showFromLocalStorage()
 }
 export function deleteFromLocalStorage (city) {
@@ -40,6 +43,12 @@ export function deleteFromLocalStorage (city) {
 }
 
 export function basicCityInfo () {
+    if(favouriteCities.length === 0) {
+        let keys = Object.keys(localStorage).filter(city => city !== 'currentCity')
+        for(let value of keys) {
+            favouriteCities.push(localStorage.getItem(value))
+        }
+    }
     let savedCity = localStorage.getItem('currentCity')
     if(savedCity) {
         renderHtml(savedCity)
@@ -47,5 +56,4 @@ export function basicCityInfo () {
     else {
         renderHtml(setCurrentCity())
     }
-
 }

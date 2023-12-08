@@ -21,7 +21,8 @@ export function addToFavourite () {
     else {
         let favouriteCity = cityBottom.textContent
         favouriteCities.push(favouriteCity)
-        addToLocalStorage(favouriteCity, favouriteCity)
+        addToLocalStorage(favouriteCities)
+        setCurrentCity(cityBottom.textContent)
         // renderFavourite()
     }
 }
@@ -53,7 +54,8 @@ export function deleteFavourite (event) {
     event.stopPropagation()
     const deletedLi = event.target.parentNode.textContent
     favouriteCities = favouriteCities.filter(city => city !== deletedLi)
-    deleteFromLocalStorage(deletedLi)
+    addToLocalStorage(favouriteCities)
+    // deleteFromLocalStorage(deletedLi)
     showFromLocalStorage()
     // renderFavourite()
 }
