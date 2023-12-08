@@ -1,10 +1,12 @@
 import {getWeather} from "./getWeather.js";
 import {getCityCoord} from "./forecastHistory.js";
+import {setCurrentCity} from "./localStorage.js";
 import {deg, cityBottom, forecastImg, imgUrl, feelsLike, sunsetBlock, sunriseBlock, inputValue} from "./globalConst.js";
 
-export function renderHtml () {
-    getCityCoord(inputValue.value.trim())
-    getWeather()
+export function renderHtml (city) {
+
+    getCityCoord(city)
+    getWeather(city)
         .then(result => {
             if(result !== undefined) {
                 let mainInfo = result.main
@@ -18,6 +20,7 @@ export function renderHtml () {
                 let mainImg = `<img src="${imgUrl}${mainIcon.icon}@4x.png">`
                 deg.textContent = Math.floor(temperature) + "°"
                 cityBottom.textContent = result.name
+                setCurrentCity(result.name)
                 forecastImg.innerHTML = mainImg
                 feelsLike.textContent = `Feels like: ${feels}`
                 sunriseBlock.textContent = `Sunrise: ${sunrise.getHours()}:${sunrise.getMinutes()}`

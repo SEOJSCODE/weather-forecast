@@ -10,7 +10,8 @@ import {
     sunsetBlock
 } from "./globalConst.js";
 import {getCityCoord} from "./forecastHistory.js";
-let favouriteCities = []
+import {addToLocalStorage, deleteFromLocalStorage, showFromLocalStorage, setCurrentCity} from "./localStorage.js";
+export let favouriteCities = []
 
 export function addToFavourite () {
     if(favouriteCities.includes(cityBottom.textContent)) {
@@ -18,8 +19,10 @@ export function addToFavourite () {
         return
     }
     else {
-        favouriteCities.push(cityBottom.textContent)
-        renderFavourite()
+        let favouriteCity = cityBottom.textContent
+        favouriteCities.push(favouriteCity)
+        addToLocalStorage(favouriteCity, favouriteCity)
+        // renderFavourite()
     }
 }
 
@@ -46,15 +49,18 @@ export function renderListCities() {
     }
 }
 
-function deleteFavourite (event) {
+export function deleteFavourite (event) {
     event.stopPropagation()
     const deletedLi = event.target.parentNode.textContent
     favouriteCities = favouriteCities.filter(city => city !== deletedLi)
-    renderFavourite()
+    deleteFromLocalStorage(deletedLi)
+    showFromLocalStorage()
+    // renderFavourite()
 }
 
 export function showFromFavourite (event) {
     const cityName = event.target.textContent
+    setCurrentCity(cityName)
     const serverUrl = 'https://api.openweathermap.org/data/2.5/weather'
     const apiKey = 'a21a4e21ee96247f35e1dab8b15d2fd0\n'
     const url = `${serverUrl}?q=${cityName}&appid=${apiKey}`

@@ -1,13 +1,19 @@
-import {addfavourite, inputForm} from "./globalConst.js";
+import {addfavourite, inputForm, inputValue, body} from "./globalConst.js";
 import {renderHtml} from "./renderHtml.js";
 import {addToFavourite} from "./addFavourite.js";
+import {showFromLocalStorage} from "./localStorage.js";
 inputForm.addEventListener('submit', showForecast)
 addfavourite.addEventListener('click', addToFavourite)
 
 
+
+
+showFromLocalStorage()
 function showForecast (event) {
     event.preventDefault()
-    renderHtml()
+    let cityName = inputValue.value.trim()
+    console.log(cityName)
+    renderHtml(cityName)
 }
 
 

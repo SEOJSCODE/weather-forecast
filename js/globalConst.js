@@ -12,7 +12,8 @@ export const
     sunsetBlock = document.querySelector('.sunset'),
     time = document.querySelector('.time'),
     daysBlock = document.querySelector('.days-block'),
-    oneKelvin = Number(273,15)
+    oneKelvin = Number(273,15),
+    body = document.body
 
 
 
