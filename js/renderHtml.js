@@ -16,6 +16,10 @@ export function renderHtml (city) {
                 let feels = Math.floor(mainInfo.feels_like - oneKelvin)
                 let sunrise = new Date(result.sys['sunrise'] * 1000)
                 let sunset = new Date(result.sys['sunset'] * 1000)
+                let sunriseHours = sunrise.getHours().toString()
+                let sunriseMinutes = sunrise.getMinutes().toString()
+                let sunsetHours = sunset.getHours().toString()
+                let sunsetMinutes = sunset.getMinutes().toString()
                 let temperature = temp - oneKelvin
                 let mainImg = `<img src="${imgUrl}${mainIcon.icon}@4x.png">`
                 deg.textContent = Math.floor(temperature) + "°"
@@ -23,8 +27,8 @@ export function renderHtml (city) {
                 setCurrentCity(result.name)
                 forecastImg.innerHTML = mainImg
                 feelsLike.textContent = `Feels like: ${feels}`
-                sunriseBlock.textContent = `Sunrise: ${sunrise.getHours()}:${sunrise.getMinutes()}`
-                sunsetBlock.textContent = `Sunset: ${sunset.getHours()}:${sunset.getMinutes()}`
+                sunriseBlock.textContent = `Sunrise: ${sunriseHours.padStart(2, '0')}:${sunriseMinutes.padEnd(2, '0')}`
+                sunsetBlock.textContent = `Sunset: ${sunsetHours.padStart(2, '0')}:${sunriseMinutes.padEnd(2, '0')}`
                 console.log(sunrise)
             }
             console.log(result)
