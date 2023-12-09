@@ -1,4 +1,4 @@
-import {inputValue, daysBlock, time, oneKelvin, imgUrl, listcities} from "./globalConst.js";
+import {daysBlock, time, oneKelvin, imgUrl} from "./globalConst.js";
 
 export function getCityCoord (city) {
     const serverUrl = 'https://api.openweathermap.org/data/2.5/forecast'
@@ -35,7 +35,6 @@ export function getCityCoord (city) {
                 divForecast.appendChild(dayIcon)
 
             }
-            console.log(forecastObjects)
         })
 }
 

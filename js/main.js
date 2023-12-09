@@ -1,4 +1,4 @@
-import {addfavourite, inputForm, inputValue, body} from "./globalConst.js";
+import {addfavourite, inputForm, inputValue} from "./globalConst.js";
 import {renderHtml} from "./renderHtml.js";
 import {addToFavourite} from "./addFavourite.js";
 import {showFromLocalStorage} from "./localStorage.js";

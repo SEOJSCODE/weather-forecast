@@ -10,10 +10,12 @@ import {
     sunsetBlock
 } from "./globalConst.js";
 import {getCityCoord} from "./forecastHistory.js";
-import {addToLocalStorage, deleteFromLocalStorage, showFromLocalStorage, setCurrentCity} from "./localStorage.js";
-export let favouriteCities = []
+import {addToLocalStorage, showFromLocalStorage, setCurrentCity} from "./localStorage.js";
+import {renderHtml} from "./renderHtml.js";
 
-export function addToFavourite () {
+export let favouriteCities = JSON.parse(localStorage.getItem('cities'))
+export function addToFavourite (event) {
+    event.stopPropagation()
     if(favouriteCities.includes(cityBottom.textContent)) {
         alert('Error: Такой город уже есть в избранном!')
         return
@@ -23,26 +25,9 @@ export function addToFavourite () {
         favouriteCities.push(favouriteCity)
         addToLocalStorage(favouriteCities)
         setCurrentCity(cityBottom.textContent)
-        // renderFavourite()
     }
 }
 
-function renderFavourite () {
-    renderListCities()
-    for(const value of favouriteCities) {
-        let li = document.createElement('li')
-        let span = document.createElement('span')
-        span.classList.add('delete-button')
-        span.addEventListener('click', deleteFavourite)
-        li.classList.add('city')
-        li.textContent = value
-        li.appendChild(span)
-        li.addEventListener('click', showFromFavourite)
-        listcities.appendChild(li)
-    }
-    console.log(favouriteCities)
-
-}
 
 export function renderListCities() {
     while (listcities.firstChild) {
@@ -55,9 +40,8 @@ export function deleteFavourite (event) {
     const deletedLi = event.target.parentNode.textContent
     favouriteCities = favouriteCities.filter(city => city !== deletedLi)
     addToLocalStorage(favouriteCities)
-    // deleteFromLocalStorage(deletedLi)
     showFromLocalStorage()
-    // renderFavourite()
+    renderHtml('Moscow')
 }
 
 export function showFromFavourite (event) {
@@ -85,14 +69,19 @@ export function showFromFavourite (event) {
                 let feels = Math.floor(mainInfo.feels_like - oneKelvin)
                 let sunrise = new Date(result.sys['sunrise'] * 1000)
                 let sunset = new Date(result.sys['sunset'] * 1000)
+                let sunriseHours = sunrise.getHours().toString()
+                let sunriseMinutes = sunrise.getMinutes().toString()
+                let sunsetHours = sunset.getHours().toString()
+                let sunsetMinutes = sunset.getMinutes().toString()
                 let temperature = temp - oneKelvin
                 let mainImg = `<img src="${imgUrl}${mainIcon.icon}@4x.png">`
                 deg.textContent = Math.floor(temperature) + "°"
                 cityBottom.textContent = result.name
+                setCurrentCity(result.name)
                 forecastImg.innerHTML = mainImg
                 feelsLike.textContent = `Feels like: ${feels}`
-                sunriseBlock.textContent = `Sunrise: ${sunrise.getHours()}:${sunrise.getMinutes()}`
-                sunsetBlock.textContent = `Sunset: ${sunset.getHours()}:${sunset.getMinutes()}`
+                sunriseBlock.textContent = `Sunrise: ${sunriseHours.padStart(2, '0')}:${sunriseMinutes.padEnd(2, '0')}`
+                sunsetBlock.textContent = `Sunset: ${sunsetHours.padStart(2, '0')}:${sunsetMinutes.padEnd(2, '0')}`
             }
             getCityCoord (cityName)
         })

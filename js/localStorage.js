@@ -4,26 +4,27 @@ import {deleteFavourite} from "./addFavourite.js";
 import {renderHtml} from "./renderHtml.js"
 
 export function setCurrentCity (city) {
+    let currentCity
     let defaultCity = 'Moscow'
     if(city) {
-        localStorage.setItem('currentCity', city)
+        currentCity = localStorage.setItem('currentCity', city)
     }
     else {
-        localStorage.setItem('currentCity', defaultCity)
+        currentCity = localStorage.setItem('currentCity', defaultCity)
     }
+    return currentCity
 
 }
 export function showFromLocalStorage () {
-    basicCityInfo()
+    renderHtml('Moscow')
     renderListCities()
-    let keys = Object.keys(localStorage).filter(city => city !== 'currentCity')
-    for(const value of keys) {
+    for(const value of favouriteCities) {
         let li = document.createElement('li')
         let span = document.createElement('span')
         span.classList.add('delete-button')
         span.addEventListener('click', deleteFavourite)
         li.classList.add('city')
-        li.textContent = localStorage.getItem(value)
+        li.textContent = value
         li.appendChild(span)
         li.addEventListener('click', showFromFavourite)
         listcities.appendChild(li)
@@ -32,28 +33,7 @@ export function showFromLocalStorage () {
 
 export function addToLocalStorage(cities) {
     localStorage.clear()
-    for (let value of cities) {
-        localStorage.setItem(value, value)
-    }
+    localStorage.setItem('cities', JSON.stringify(cities))
     showFromLocalStorage()
 }
-export function deleteFromLocalStorage (city) {
-    localStorage.removeItem(city)
-    setCurrentCity()
-}
 
-export function basicCityInfo () {
-    if(favouriteCities.length === 0) {
-        let keys = Object.keys(localStorage).filter(city => city !== 'currentCity')
-        for(let value of keys) {
-            favouriteCities.push(localStorage.getItem(value))
-        }
-    }
-    let savedCity = localStorage.getItem('currentCity')
-    if(savedCity) {
-        renderHtml(savedCity)
-    }
-    else {
-        renderHtml(setCurrentCity())
-    }
-}
