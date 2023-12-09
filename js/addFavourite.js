@@ -13,7 +13,8 @@ import {getCityCoord} from "./forecastHistory.js";
 import {addToLocalStorage, showFromLocalStorage, setCurrentCity} from "./localStorage.js";
 import {renderHtml} from "./renderHtml.js";
 
-export let favouriteCities = JSON.parse(localStorage.getItem('cities'))
+export let favouriteCities = []
+favouriteCities = JSON.parse(localStorage.getItem('cities'))
 export function addToFavourite (event) {
     event.stopPropagation()
     if(favouriteCities.includes(cityBottom.textContent)) {
