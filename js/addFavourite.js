@@ -1,5 +1,5 @@
 import {
-    cityBottom,
+    cityBottom, defaultCity,
     deg,
     feelsLike,
     forecastImg,
@@ -14,7 +14,6 @@ import {addToLocalStorage, showFromLocalStorage, setCurrentCity} from "./localSt
 import {renderHtml} from "./renderHtml.js";
 
 export let favouriteCities = []
-favouriteCities = JSON.parse(localStorage.getItem('cities'))
 export function addToFavourite (event) {
     event.stopPropagation()
     if(favouriteCities.includes(cityBottom.textContent)) {
@@ -41,8 +40,7 @@ export function deleteFavourite (event) {
     const deletedLi = event.target.parentNode.textContent
     favouriteCities = favouriteCities.filter(city => city !== deletedLi)
     addToLocalStorage(favouriteCities)
-    showFromLocalStorage()
-    renderHtml('Moscow')
+    renderHtml(defaultCity)
 }
 
 export function showFromFavourite (event) {

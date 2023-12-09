@@ -1,5 +1,5 @@
 import {showFromFavourite, renderListCities, favouriteCities} from "./addFavourite.js";
-import {listcities} from "./globalConst.js";
+import {listcities, defaultCity} from "./globalConst.js";
 import {deleteFavourite} from "./addFavourite.js";
 import {renderHtml} from "./renderHtml.js"
 
@@ -16,9 +16,9 @@ export function setCurrentCity (city) {
 
 }
 export function showFromLocalStorage () {
-    renderHtml('Moscow')
     renderListCities()
-    for(const value of favouriteCities) {
+    let storageArray = JSON.parse(localStorage.getItem('cities'))
+    for(const value of storageArray) {
         let li = document.createElement('li')
         let span = document.createElement('span')
         span.classList.add('delete-button')
@@ -36,4 +36,6 @@ export function addToLocalStorage(cities) {
     localStorage.setItem('cities', JSON.stringify(cities))
     showFromLocalStorage()
 }
+
+
 
